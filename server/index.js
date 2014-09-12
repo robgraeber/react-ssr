@@ -1,20 +1,29 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var hbs = require('hbs');
+var url          = require('url');
+var path         = require('path');
+var express      = require('express');
+var ReactAsync   = require('react-async');
+var nodejsx      = require('node-jsx').install({extension: '.jsx', addDocblock: true});
+var AppView      = require('../client/app/AppView');
 
 var app = express();
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
-["./tasks/"].forEach(function (routePath) {
+["./api/tasks/"].forEach(function (routePath) {
   var router = require(routePath);
   app.use(router);
 });
+
+var renderApp = function (req, res, next) {
+  var path = url.parse(req.url).pathname;
+  var appView = AppView({path: path});
+  ReactAsync.renderComponentToStringWithAsyncState(appView, function(err, html) {
+    if (err) {
+      return next(err);
+    }
+    res.send('<!doctype html>\n' + html);
+  });
+}
+app.use(renderApp);
 
 app.set('port', process.env.PORT || 8000);
 

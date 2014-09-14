@@ -12,9 +12,6 @@ var Routes   = ReactRouter.Locations;
 var Route    = ReactRouter.Location;
 var Link     = ReactRouter.Link;
 
-
-
-
 var AppView = React.createClass({
   render: function(){   
     return (
@@ -42,7 +39,6 @@ var AppView = React.createClass({
     );
   }
 });
-
 
 module.exports = AppView;
 

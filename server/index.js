@@ -23,7 +23,7 @@ var renderApp = function (req, res, next) {
     res.send('<!doctype html>\n' + html);
   });
 }
-app.use(renderApp);
+app.get("*", renderApp);
 
 app.set('port', process.env.PORT || 8000);
 

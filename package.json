@@ -3,17 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {},
-  "browser": {},
-  "browserify-shim": {},
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
   "dependencies": {
     "browser-sync": "^1.3.6",
     "browserify": "^5.11.0",
-    "browserify-shim": "^3.7.0",
     "event-stream": "^3.1.7",
     "express": "^4.9.0",
     "fibers": "^1.0.2",
@@ -31,6 +23,7 @@
     "node-jsx": "git://github.com/robgraeber/node-jsx",
     "react": "^0.11.1",
     "react-async": "^1.0.2",
+    "react-router-component": "^0.20.1",
     "reactify": "^0.14.0",
     "vinyl-source-stream": "^0.1.1",
     "watchify": "^1.0.2"

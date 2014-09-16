@@ -10,32 +10,22 @@ var AboutView = require('./AboutView/');
 
 var Routes   = ReactRouter.Locations;
 var Route    = ReactRouter.Location;
+var NotFound = ReactRouter.NotFound;
 var Link     = ReactRouter.Link;
 
 var AppView = React.createClass({
   render: function(){   
     return (
-      <html lang="en">
-        <head>
-          <meta charSet="utf-8" />
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <title>React Boilerplate!</title>
-          <link rel="stylesheet" type='text/css' href="/app.css" />
-          <script type="text/javascript" src="/app.js"></script>
-        </head>
-        <body>
-        <div id="container">
-          <h1>React Boilerplate!</h1>
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Routes path={this.props.path}>
-            <Route path="/" handler={HomeView} />
-            <Route path="/about" handler={AboutView} />
-            <Route path="*" handler={HomeView} />
-          </Routes>
-        </div>
-        </body>
-      </html>
+      <div id="container">
+        <h1>React Boilerplaate!</h1>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
+        <Routes path={this.props.path}>
+          <Route path="/" handler={HomeView} />
+          <Route path="/about" handler={AboutView} />
+          <NotFound handler={HomeView} />
+        </Routes>
+      </div>
     );
   }
 });
@@ -44,6 +34,6 @@ module.exports = AppView;
 
 if (typeof window !== 'undefined') {
   window.onload = function() {
-    React.renderComponent(<AppView />, document);
+    React.renderComponent(<AppView />, document.body);
   };
 }

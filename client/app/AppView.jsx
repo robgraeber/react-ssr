@@ -5,8 +5,8 @@ require('react-router-component/lib/AsyncRouteRenderingMixin').setRoutingState =
   this.replaceState(state, cb);
 };
 var ReactRouter = require('react-router-component');
-var HomeView = require('./HomeView/');
-var AboutView = require('./AboutView/');
+var HomePage = require('./views/HomePage/');
+var AboutPage = require('./views/AboutPage/');
 
 var Routes   = ReactRouter.Locations;
 var Route    = ReactRouter.Location;
@@ -21,9 +21,9 @@ var AppView = React.createClass({
         <Link href="/">Home</Link>
         <Link href="/about">About</Link>
         <Routes path={this.props.path}>
-          <Route path="/" handler={HomeView} />
-          <Route path="/about" handler={AboutView} />
-          <NotFound handler={HomeView} />
+          <Route path="/" handler={HomePage} />
+          <Route path="/about" handler={AboutPage} />
+          <NotFound handler={HomePage} />
         </Routes>
       </div>
     );

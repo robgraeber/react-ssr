@@ -7,7 +7,7 @@ var Promise      = require('bluebird');
 var compress     = require('compression');
 var ReactAsync   = Promise.promisifyAll(require('react-async'));
 var nodejsx      = require('node-jsx').install({extension: '.jsx', addDocblock: true});
-var AppView      = require('../client/app/App');
+var AppView      = require('../client/app/AppView');
 
 var app = express();
 var indexHtml = fs.readFileSync(path.join(__dirname, '../client/index.html'), 'utf-8');

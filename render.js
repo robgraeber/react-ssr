@@ -1,7 +1,7 @@
 var nodeJsx      = require('node-jsx').install({extension: '.jsx', addDocblock: true});
 var fs           = require('fs');
 var url          = require('url');
-var React        = require('React');
+var React        = require('react');
 var Promise      = require('bluebird');
 var Router       = require('react-router');
 

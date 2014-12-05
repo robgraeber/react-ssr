@@ -3,7 +3,7 @@ var cluster = require('cluster');
 if (cluster.isMaster) {
     var cpuCount = require('os').cpus().length;
 
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < cpuCount; i++) {
         cluster.fork();
     }
     cluster.on('exit', function (worker) {
@@ -28,7 +28,6 @@ if (cluster.isMaster) {
 
     app.get('*', render);
 
-    app.set('view engine', 'hbs');
     app.set('port', process.env.PORT || 8000);
     app.listen(app.get('port'), function() {
         console.log('Express server listening on port ' + app.get('port'));

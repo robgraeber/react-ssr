@@ -1,25 +1,36 @@
 var cluster = require('cluster');
 
-// Code to run if we're in the master process
 if (cluster.isMaster) {
-
-    // Count the machine's CPUs
     var cpuCount = require('os').cpus().length;
 
-    // Create a worker for each CPU
-    for (var i = 0; i < cpuCount; i += 1) {
+    for (var i = 0; i < 1; i++) {
         cluster.fork();
     }
-
-    // Listen for dying workers
     cluster.on('exit', function (worker) {
-        // Replace the dead worker
         console.log('Worker ' + worker.id + ' died :(');
         cluster.fork();
     });
-    
-// Code to run if we're in a worker process
 } else {
+    var path      = require('path');
+    var render    = require('./render');
+    var express   = require('express');
+    var compress  = require('compression');
     console.log('Worker ' + cluster.worker.id + ' running!');
-    require("./server/")
+    
+    var app = express();
+    app.use(compress());
+    app.get('/', render); //render index.html server side
+    app.use(express.static(path.join(__dirname, './public')));
+
+    ['./routes/posts'].forEach(function(module){
+        require(module)(app);
+    });
+
+    app.get('*', render);
+
+    app.set('view engine', 'hbs');
+    app.set('port', process.env.PORT || 8000);
+    app.listen(app.get('port'), function() {
+        console.log('Express server listening on port ' + app.get('port'));
+    });
 }

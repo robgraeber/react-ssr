@@ -1,5 +1,5 @@
 var React = require('react');
-var StoreMixin = require('fluxible-app').StoreMixin;
+var StoreMixin = require('../mixins/StoreMixin');
 var FoodEventStore = require('../stores/FoodEventStore');
 var FoodEventActions = require('../actions/FoodEventActions');
 
@@ -8,13 +8,10 @@ var Component = module.exports = React.createClass({
     statics: {
         storeListeners: [FoodEventStore],
         fetchData: function (params, context) {
-            return FoodEventActions.updateFoodEvents("SF", context);
+            return FoodEventActions(context).updateFoodEvents("SF");
         }
     },
-    getInitialState: function () {
-        return this.getStateFromStores();
-    },
-    getStateFromStores: function () {
+    getStateFromStores: function(){
         return {
             foodEvents: this.getStore(FoodEventStore).foodEvents || []
         };
@@ -23,7 +20,6 @@ var Component = module.exports = React.createClass({
         if (!this.getStore(FoodEventStore).foodEvents)
             Component.fetchData(this.props.params, this.props.context);
     },
-    onChange: function () { this.setState(this.getStateFromStores()); },
     render: function () {  
         return (
             <div>

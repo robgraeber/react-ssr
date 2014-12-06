@@ -6,7 +6,7 @@ var Store = module.exports = createStore({
     },
     storeName: 'FoodEventStore',
     handlers: {
-        'foodEventData': function (foodEvents) {
+        'FoodEvent.Data': function (foodEvents) {
             this.foodEvents = foodEvents;
             this.emitChange();
         }

@@ -19,7 +19,6 @@ if (cluster.isMaster) {
     
     var app = express();
     app.use(compress());
-    app.get('/', render); //render index.html server side
     app.use(express.static(path.join(__dirname, './public')));
 
     ['./routes/posts'].forEach(function(module){

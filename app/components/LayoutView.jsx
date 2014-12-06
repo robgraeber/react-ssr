@@ -4,7 +4,7 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 
 var Component = module.exports = React.createClass({
-    render: function (){   
+    render: function () {   
         return (
             <html>
                 <head>

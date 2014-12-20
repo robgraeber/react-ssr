@@ -86,18 +86,14 @@ StoreMixin = {
     /**
      * Default function gets the state from stores
      * @returns {Object}
-     * @method getStateFromStores
+     * @method getInitialState
      */
     getInitialState: function () {
-        return this.getStateFromStores();
-    },
-    /**
-     * Default function returns an empty object
-     * @returns {Object}
-     * @method getStateFromStores
-     */
-    getStateFromStores: function () {
-        return {};
+        if(!this.stateMixin){
+            console.error("ERROR: this.stateMixin() must be defined!");
+            return {};
+        }
+        return this.stateMixin();
     },
     /**
      * The default change handler, overwrite it to change
@@ -105,7 +101,11 @@ StoreMixin = {
      * @method _onChange
      */
     _onChange: function () { 
-        this.setState(this.getStateFromStores()); 
+        if(!this.stateMixin){
+            console.error("ERROR: this.stateMixin() must be defined!");
+            return;
+        }
+        this.setState(this.stateMixin()); 
     },
     /**
      * Gets a store-change handler from the component

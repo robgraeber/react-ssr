@@ -26,10 +26,12 @@ var renderApp = function (req, res, next) {
 
     Router.run(routes, urlPath, function (Handler, state){
         var context = Dispatcher.createContext();
+
         Promise.all([Handler, state, fetchData(state.routes, state.params, context)])
         .spread(function (Handler, state){
             var component = Handler({params: state.params, context: context});
             var html = React.renderToString(component);
+            
             res.send(html);
         })
         .catch(function (){
